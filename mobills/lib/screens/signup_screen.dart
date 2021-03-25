@@ -1,9 +1,8 @@
 import "package:flutter/material.dart";
-import "signup_screen.dart";
-// import "package:google_fonts/google_fonts.dart";
+import 'package:mobills/screens/signin_screen.dart';
 
-class SigninScreen extends StatelessWidget {
-  static const routeName = '/sign-in';
+class SignupScreen extends StatelessWidget {
+  static const routeName = '/sign-up';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,9 +19,10 @@ class SigninScreen extends StatelessWidget {
             ),
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Welcome,",
+                  "Create Account,",
                   // style:
                   style: TextStyle(
                     color: Colors.white,
@@ -35,7 +35,7 @@ class SigninScreen extends StatelessWidget {
                   height: 10,
                 ),
                 Text(
-                  "Sign in to continue!",
+                  "Sign up to get started!",
                   // style:
                   style: TextStyle(
                     color: Colors.white.withOpacity(0.7),
@@ -51,6 +51,52 @@ class SigninScreen extends StatelessWidget {
               child: Form(
                 child: Column(
                   children: [
+                    TextFormField(
+                      cursorColor: Colors.white,
+                      textInputAction: TextInputAction.next,
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                      // onFieldSubmitted: (_) =>
+                      //     FocusScope.of(context).requestFocus(_semNode),
+                      // validator: (value) {
+                      //   if (value.isEmpty) {
+                      //     return 'Please Enter Title';
+                      //   }
+
+                      //   return null;
+                      // },
+                      // onSaved: (value) {
+                      //   title = value;
+                      // },
+                      decoration: InputDecoration(
+                        hintText: 'Full Name*',
+                        hintStyle: TextStyle(
+                          color: Colors.white.withOpacity(0.7),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16),
+                          borderSide: BorderSide(
+                            width: 2,
+                            color: Color(0xFF6953F7),
+                          ),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16),
+                          borderSide: BorderSide(
+                            color: Color(0xFF6953F7),
+                          ),
+                        ),
+                        // border: OutlineInputBorder(
+                        //     borderRadius: BorderRadius.circular(16),
+                        //     borderSide: BorderSide(color: Colors.white)),
+                        contentPadding:
+                            EdgeInsets.symmetric(vertical: 16, horizontal: 10),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
                     TextFormField(
                       cursorColor: Colors.white,
                       textInputAction: TextInputAction.next,
@@ -139,18 +185,50 @@ class SigninScreen extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: 10,
+                      height: 20,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Text(
-                          "Forgot Password?",
-                          style: TextStyle(
-                            color: Colors.white,
+                    TextFormField(
+                      cursorColor: Colors.white,
+                      textInputAction: TextInputAction.next,
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                      // onFieldSubmitted: (_) =>
+                      //     FocusScope.of(context).requestFocus(_semNode),
+                      // validator: (value) {
+                      //   if (value.isEmpty) {
+                      //     return 'Please Enter Title';
+                      //   }
+
+                      //   return null;
+                      // },
+                      // onSaved: (value) {
+                      //   title = value;
+                      // },
+                      decoration: InputDecoration(
+                        hintText: 'Confirm Password*',
+                        hintStyle: TextStyle(
+                          color: Colors.white.withOpacity(0.7),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16),
+                          borderSide: BorderSide(
+                            width: 2,
+                            color: Color(0xFF6953F7),
                           ),
                         ),
-                      ],
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16),
+                          borderSide: BorderSide(
+                            color: Color(0xFF6953F7),
+                          ),
+                        ),
+                        // border: OutlineInputBorder(
+                        //     borderRadius: BorderRadius.circular(16),
+                        //     borderSide: BorderSide(color: Colors.white)),
+                        contentPadding:
+                            EdgeInsets.symmetric(vertical: 16, horizontal: 10),
+                      ),
                     ),
                     Container(
                       margin: EdgeInsets.only(top: 40),
@@ -162,7 +240,7 @@ class SigninScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(15),
                       ),
                       child: Text(
-                        "Sign In",
+                        "Sign Up",
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w500,
@@ -173,60 +251,13 @@ class SigninScreen extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(
-              height: 40,
-            ),
-            Center(
-              child: Text(
-                "OR",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 40,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  alignment: Alignment.center,
-                  width: 100,
-                  height: 50,
-                  decoration: BoxDecoration(
-                      // color: Color(0xFF6953F7),
-                      borderRadius: BorderRadius.circular(16)),
-                  child: Image.asset('assets/images/googlelogo.png'),
-                ),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.25,
-                ),
-                Container(
-                  alignment: Alignment.center,
-                  width: 100,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    // color: Color(0xFF6953F7),
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: Image.asset('assets/images/facebook.png'),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 40,
-            ),
             Expanded(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(
-                    "Don't have an account?",
+                    "Already have an account?",
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.white.withOpacity(0.7),
@@ -235,9 +266,9 @@ class SigninScreen extends StatelessWidget {
                   ),
                   InkWell(
                     onTap: () => Navigator.of(context)
-                        .pushReplacementNamed(SignupScreen.routeName),
+                        .pushReplacementNamed(SigninScreen.routeName),
                     child: Text(
-                      " Sign Up",
+                      " Sign In",
                       style: TextStyle(
                         fontSize: 18,
                         color: Colors.white,
