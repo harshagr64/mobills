@@ -44,11 +44,11 @@ class _SignupScreenState extends State<SignupScreen> {
         _key.currentState.reset();
         print("reset");
       } else {
-        Signup.signUp(name, email, password);
+        Signup.signUp(name, email, password, context);
+        Navigator.of(context).pushReplacementNamed(SigninScreen.routeName);
         setState(() {
           _isLoading = false;
         });
-        Navigator.of(context).pushReplacementNamed(MyHome.routeName);
       }
     }
 

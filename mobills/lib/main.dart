@@ -1,4 +1,6 @@
 import "package:flutter/material.dart";
+import 'package:mobills/screens/demo.dart';
+import 'package:mobills/screens/email_verification.dart';
 import "screens/home_screen.dart";
 import "screens/signup_screen.dart";
 import "screens/signin_screen.dart";
@@ -17,11 +19,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Mobills',
-      home: SigninScreen(),
+      home: Demo(),
       routes: {
         SignupScreen.routeName: (ctx) => SignupScreen(),
         SigninScreen.routeName: (ctx) => SigninScreen(),
         MyHome.routeName: (ctx) => MyHome(),
+        EmailVerification.routeName: (ctx) => EmailVerification(),
       },
     );
   }

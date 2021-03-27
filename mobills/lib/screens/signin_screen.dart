@@ -1,11 +1,31 @@
 import "package:flutter/material.dart";
 import "signup_screen.dart";
+import "../widgets/sign_in.dart";
 // import "package:google_fonts/google_fonts.dart";
 
-class SigninScreen extends StatelessWidget {
+class SigninScreen extends StatefulWidget {
   static const routeName = '/sign-in';
+
+  @override
+  _SigninScreenState createState() => _SigninScreenState();
+}
+
+class _SigninScreenState extends State<SigninScreen> {
+  final _key = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+    String email;
+    String password;
+
+    void trysign() {
+      final validate = _key.currentState.validate();
+      if (!validate) {
+        return;
+      }
+      _key.currentState.save();
+      Signin.signIn(email, password, context);
+    }
+
     return Scaffold(
       backgroundColor: Color(0xFF362352).withOpacity(0.2),
       appBar: null,
@@ -52,6 +72,7 @@ class SigninScreen extends StatelessWidget {
               ),
               Container(
                 child: Form(
+                  key: _key,
                   child: Column(
                     children: [
                       TextFormField(
@@ -60,18 +81,19 @@ class SigninScreen extends StatelessWidget {
                         style: TextStyle(
                           color: Colors.white,
                         ),
-                        // onFieldSubmitted: (_) =>
-                        //     FocusScope.of(context).requestFocus(_semNode),
-                        // validator: (value) {
-                        //   if (value.isEmpty) {
-                        //     return 'Please Enter Title';
-                        //   }
-
-                        //   return null;
-                        // },
-                        // onSaved: (value) {
-                        //   title = value;
-                        // },
+                        validator: (value) {
+                          print('hello $value');
+                          if (value.isEmpty) {
+                            return 'Please enter Email Id';
+                          } else if (!value.contains(RegExp(
+                              r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+"))) {
+                            return "Enter a valid Email Id";
+                          }
+                          return null;
+                        },
+                        onSaved: (value) {
+                          email = value;
+                        },
                         decoration: InputDecoration(
                           hintText: 'Email Id*',
                           hintStyle: TextStyle(
@@ -90,9 +112,10 @@ class SigninScreen extends StatelessWidget {
                               color: Color(0xFF6953F7),
                             ),
                           ),
-                          // border: OutlineInputBorder(
-                          //     borderRadius: BorderRadius.circular(16),
-                          //     borderSide: BorderSide(color: Colors.white)),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(16),
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
                           contentPadding: EdgeInsets.symmetric(
                               vertical: 16, horizontal: 10),
                         ),
@@ -107,18 +130,18 @@ class SigninScreen extends StatelessWidget {
                         style: TextStyle(
                           color: Colors.white.withOpacity(0.7),
                         ),
-                        // onFieldSubmitted: (_) =>
-                        //     FocusScope.of(context).requestFocus(_semNode),
-                        // validator: (value) {
-                        //   if (value.isEmpty) {
-                        //     return 'Please Enter Title';
-                        //   }
-
-                        //   return null;
-                        // },
-                        // onSaved: (value) {
-                        //   title = value;
-                        // },
+                        validator: (value) {
+                          // print('hello $value');
+                          if (value.isEmpty) {
+                            return 'Please enter password';
+                          } else if (value.length < 8 || value.length > 10) {
+                            return 'Password must be in range of 8 to 10 characters';
+                          }
+                          return null;
+                        },
+                        onSaved: (value) {
+                          password = value;
+                        },
                         decoration: InputDecoration(
                           hintText: 'Password*',
                           hintStyle: TextStyle(
@@ -136,6 +159,10 @@ class SigninScreen extends StatelessWidget {
                             borderSide: BorderSide(
                               color: Color(0xFF6953F7),
                             ),
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(16),
+                            borderSide: BorderSide(color: Colors.white),
                           ),
                           contentPadding: EdgeInsets.symmetric(
                               vertical: 16, horizontal: 10),
@@ -155,20 +182,23 @@ class SigninScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Container(
-                        margin: EdgeInsets.only(top: 40),
-                        alignment: Alignment.center,
-                        width: double.infinity,
-                        height: 60,
-                        decoration: BoxDecoration(
-                          color: Color(0xFF6953F7),
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: Text(
-                          "Sign In",
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500,
+                      InkWell(
+                        onTap: trysign,
+                        child: Container(
+                          margin: EdgeInsets.only(top: 40),
+                          alignment: Alignment.center,
+                          width: double.infinity,
+                          height: 60,
+                          decoration: BoxDecoration(
+                            color: Color(0xFF6953F7),
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: Text(
+                            "Sign In",
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
                         ),
                       ),
@@ -179,47 +209,49 @@ class SigninScreen extends StatelessWidget {
               SizedBox(
                 height: 40,
               ),
-              Center(
-                child: Text(
-                  "OR",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 40,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    alignment: Alignment.center,
-                    width: 100,
-                    height: 50,
-                    decoration: BoxDecoration(
-                        // color: Color(0xFF6953F7),
-                        borderRadius: BorderRadius.circular(16)),
-                    child: Image.asset('assets/images/googlelogo.png'),
-                  ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.25,
-                  ),
-                  Container(
-                    alignment: Alignment.center,
-                    width: 100,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      // color: Color(0xFF6953F7),
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    child: Image.asset('assets/images/facebook.png'),
-                  ),
-                ],
-              ),
+              // Center(
+              //   child: Text(
+              //     "OR",
+              //     textAlign: TextAlign.center,
+              //     style: TextStyle(
+              //       fontSize: 20,
+              //       color: Colors.white,
+              //       fontWeight: FontWeight.w500,
+              //     ),
+              //   ),
+              // ),
+              // SizedBox(
+              //   height: 40,
+              // ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: [
+              //     Container(
+              //       alignment: Alignment.center,
+              //       width: 100,
+              //       height: 50,
+              //       decoration: BoxDecoration(
+              //           // color: Color(0xFF6953F7),
+              //           borderRadius: BorderRadius.circular(16)),
+              //       child: InkWell(
+              //           onTap: googleSign,
+              //           child: Image.asset('assets/images/googlelogo.png')),
+              //     ),
+              //     SizedBox(
+              //       width: MediaQuery.of(context).size.width * 0.25,
+              //     ),
+              //     Container(
+              //       alignment: Alignment.center,
+              //       width: 100,
+              //       height: 50,
+              //       decoration: BoxDecoration(
+              //         // color: Color(0xFF6953F7),
+              //         borderRadius: BorderRadius.circular(16),
+              //       ),
+              //       child: Image.asset('assets/images/facebook.png'),
+              //     ),
+              //   ],
+              // ),
               SizedBox(
                 height: 40,
               ),
