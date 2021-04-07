@@ -9,9 +9,10 @@ class Demo extends StatelessWidget {
     return StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (ctx, snapShot) {
-          if (!FirebaseAuth.instance.currentUser.emailVerified) {
-            return SigninScreen();
-          } else if (snapShot.hasData) {
+          if (snapShot.hasData) {
+            if (!FirebaseAuth.instance.currentUser.emailVerified) {
+              return SigninScreen();
+            }
             print("true");
             return MyHome();
           } else {

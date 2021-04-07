@@ -5,6 +5,7 @@ import "screens/home_screen.dart";
 import "screens/signup_screen.dart";
 import "screens/signin_screen.dart";
 import "package:firebase_core/firebase_core.dart";
+import "screens/add_expense_screen.dart";
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
         SigninScreen.routeName: (ctx) => SigninScreen(),
         MyHome.routeName: (ctx) => MyHome(),
         EmailVerification.routeName: (ctx) => EmailVerification(),
+        AddExpenseScreen.routeName: (ctx) => AddExpenseScreen(),
       },
     );
   }
